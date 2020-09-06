@@ -1,3 +1,5 @@
+# 基本命令
+
 ## apt
 > 作用：软件包管理
 ```
@@ -31,6 +33,12 @@
 1. cp 源文件 目标文件/目标文件夹
 2. cp -r 源文件夹 目标文件/目标文件夹
 ```
+
+## ctrl+alt+t
+> 作用：快捷键开启多个终端
+
+## ctrl+shift+t
+> 作用：快捷键一个终端里开启多个小终端
 
 ## df
 > 作用：查看磁盘占用情况
@@ -158,6 +166,34 @@ watch -n 1 nvidia-smi
 常用命令
 1. rm file：删除文件
 2. rm -r dir：删除文件夹
+```
+
+## scp
+> 作用：上传文件到远程服务器
+```
+常用命令
+1. scp -r localDir username@remoteAddress:remoterDir：将本地文件夹传送到远程服务器的某个目录。
+2. scp localFile username@remoteAddress:remoterDir：将本地文件传送到远程服务器。
+3. scp -r username@remoteAddress:remoteDir localDir：将远程服务器的文件夹传送到本地。
+4. scp username@remoteAddress:remoteFile localDir：将远程服务器的文件传送到本地。
+```
+
+## screen
+> 作用：在用ssh远程服务器的时候，若关闭远程窗口，那么你的程序就会被杀死，所以需要使用screen命令开启一个窗口，运行脚本然后安全退出，这样在关闭远程的后，你的脚本仍在运行。
+```
+常用命令
+1. screen -S sockname：新建一个窗口
+2. screen -ls：查看正在后台运行的窗口
+3. screen -r < sockname>：进入某个已打开的窗口
+4. CTRL+a 松开后按d：退出当前sock
+5. CTRL+a 松开后按k：杀死当前sock
+```
+
+## ssh
+> 作用：远程某台服务器
+```
+常用命令
+1. ssh <user_name>@address：然后会提示输入密码
 ```
 
 ## tar 

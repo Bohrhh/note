@@ -3,4 +3,4 @@
 > 杂记
 
 [GitHub](https://github.com/Bohrhh/note)
-[Get Started](#introduction)
+[Get Started](#杂记)

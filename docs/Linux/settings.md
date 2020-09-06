@@ -1,3 +1,5 @@
+# 设置
+
 ## 1，鼠标滚轮设置
 1. sudo apt install imwheel：安装软件
 2. sudo vim ~/.imwheelrc： 编辑
