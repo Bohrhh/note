@@ -1,26 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>Note</title>
+  <title>deeplearning</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="/_media/vue.min.css" title="vue">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+
+  <style>
+    nav.app-nav li ul {
+      min-width: 100px;
+    }
+    article > p, article blockquote > p, .docsify-tabs__content > p {
+      text-indent: 2em;
+    }
+    article > p > img, article blockquote > p > img, .docsify-tabs__content > p > img {
+      margin-left: -2em;
+    }
+    article > ul > li, article > ol > li 
+    article blockquote > ul > li, article blockquote > ol > li {
+      margin-left: 2em;
+    }
+    pre > code.lang-csharp .token.comment {
+      color: green;
+    }
+    article > div.tip {
+      border-bottom-right-radius: 2px;
+      border-top-right-radius: 2px;
+      position: relative;
+      border-left: 4px solid rgb(255, 102, 102);
+      margin: 2em 0px;
+      padding: 12px 24px 12px 30px;
+      background-color: rgb(248, 248, 248);
+    }
+    article > .footer, article > .footer a{
+      color: #ccc;
+      font-weight: normal;
+      text-decoration: none;
+    }
+    .markdown-section pre + p.coderef {
+      margin-top: -1.2em;
+    }
+    .markdown-section p.coderef {
+      background: rgba(66,185,131,.1);
+      border-radius: 2px;
+      padding: 1rem;
+    }
+  </style>
+
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
+
       name: 'Note',
       repo: 'https://github.com/Bohrhh/note',
       disqus: 'Bohrhh',
-      loadSidebar: true ,
+      auto2top: true,
+      loadSidebar: true,
       coverpage: true,
-      subMaxLevel: 2,
-      maxLevel: 4,
+      subMaxLevel: 3,
+      maxLevel: 2,
       ga: 'UA-128791327-1',
-
       search: {
         noData: {
           '/': 'No results!'
@@ -30,32 +74,7 @@
           '/': 'Search'
         }
       },
-
-      plugins: [
-        function (hook) {
-          hook.doneEach(function () {
-            // 每次路由切换时数据全部加载完成后调用，没有参数。
-            // ...
-            if (typeof MathJax !== 'undefined') {
-              MathJax.Hub.Queue(["Typeset", MathJax.Hub])
-            }
-          })
-        }
-      ]
-
     }
-  </script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      extensions: ["tex2jax.js"],
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true
-      },
-      "HTML-CSS": { availableFonts: ["TeX"] }
-    });
   </script>
 
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
@@ -66,7 +85,7 @@
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-nginx.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
-  <script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+  <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+
 </body>
 </html>
