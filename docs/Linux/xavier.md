@@ -3,6 +3,7 @@
 #### apt 镜像源
 
 1. 编辑 /etc/apt/sources.list
+
 ```
 deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic main restricted
 deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-updates main restricted
@@ -84,7 +85,10 @@ sudo ./pip install jetson-stats
 1. apt install
 
 ```bash
-sudo apt install libgflags-dev libprotobuf-dev protobuf-compiler
+sudo apt install \
+    libgflags-dev \
+    libprotobuf-dev protobuf-compiler \
+    v4l-utils # for video capture
 
 ```
 
@@ -147,6 +151,7 @@ sudo make install
 ```
 
 7. fmt
+
 ```bash
 wget https://github.com/fmtlib/fmt/releases/download/7.0.3/fmt-7.0.3.zip
 unzip fmt-7.0.3.zip
@@ -157,3 +162,9 @@ make -j$(nproc)
 sudo make install
 ```
 
+8. torch
+
+```bash
+#从 https://elinux.org/Jetson_Zoo 下载对应版本的 pip wheel
+pip install torch-1.6.0-cp36-cp36m-linux_aarch64.whl
+```

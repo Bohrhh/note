@@ -23,6 +23,11 @@
   - [基本命令](Cmake/basicCommands.md)
   - [示例](Cmake/examples.md)
 
+- Cuda
+
+  - [简介](Cuda/introduction.md)
+  - [编程模型](Cuda/programming_model.md)
+
 - GDB
 
   - [基本命令](GDB/basicCommands.md)
