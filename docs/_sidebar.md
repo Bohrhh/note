@@ -25,6 +25,7 @@
 
 - Cuda
 
+  - [琐碎](Cuda/tips.md)
   - [简介](Cuda/introduction.md)
   - [编程模型](Cuda/programming_model.md)
 
