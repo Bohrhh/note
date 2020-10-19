@@ -78,7 +78,7 @@
  ############################################################
  add_library(
      hello_library
-     STATIC # 动态库用 SHARED
+     STATIC # 动态库用 SHARED，不写则默认STATIC
      src/hello.cpp
  )
 
@@ -183,3 +183,75 @@
 
 
 #### 4. 编译选项
+- **CMAKE_BUILD_TYPE**
+- **CMAKE_C_FLAGS**
+- **CMAKE_CXX_FLAGS**
+- **CMAKE_C_FLAGS_RELEASE**
+- **CMAKE_CXX_FLAGS_RELEASE**
+
+```CMakeLists.txt
+# Set a default build type if none was specified
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+  message(STATUS "Setting build type to ${CMAKE_BUILD_TYPE} as none was specified.")
+endif()
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall   -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall   -O3")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -march=native")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
+
+```
+
+#### 5. 第三方库
+- **find_package**
+
+```CMakeLists.txt
+# find a boost install with the libraries filesystem and system
+find_package(Boost 1.46.1 REQUIRED COMPONENTS filesystem system)
+```
+
+#### 6. ninja
+- 用cmake生成ninja的编译规则文件**build.ninja**，**rules.ninja**。ninja相当于g++，而**build.ninja**，**rules.ninja**相当于**Makefile**
+
+```
+cmake .. -G Ninja
+ninja -v
+```
+
+#### 7. 语言规则
+- **CMAKE_CXX_STANDARD**
+- **CMAKE_C_STANDARD**
+
+```
+# set the C++ standard to C++ 11
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
+```
+或者
+
+```
+# try conditional compilation
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+
+# check results and add flag
+if(COMPILER_SUPPORTS_CXX11)#
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+elseif(COMPILER_SUPPORTS_CXX0X)#
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+else()
+    message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
+```
+
+#### 8. 添加子文件夹
+- **add_subdirectory**
+
+```
+add_subdirectory(sublibrary)
+```
+
+
+
