@@ -41,7 +41,7 @@ yourUserName:x:1002:1003:,,,:/home/yourUserName:/bin/bash
 
 
 ## 6，修改计算机名及用户名
-### **root权限下修改**
+#### **root权限下修改**
 计算机名
 vim /etc/hostname
 vim /etc/hosts
@@ -56,9 +56,32 @@ mv /home/olduserame /home/newusername
 ubuntu下disk软件设置
 
 
-## 9, 更换 gcc (g++) 版本
+## 9， 更换 gcc (g++) 版本
 sudo update-alternatives --config gcc
 
+## 10， pip镜像源
+- 永久修改  
+linux：在用户主目录下新建.pip文件夹，进入.pip文件夹并创建pip.conf，编辑pip.conf。  
+windows：进入%APPDATA%，新建pip文件夹，进入pip文件夹，创建pip.ini文件，编辑pip.ini
+```
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+trusted-host = pypi.tuna.tsinghua.edu.cn
+```
+
+- 临时使用
+```
+pip install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+## 11， python多环境配置
+- 1 创建虚拟环境：`conda create -n venv_name python=3.8`
+- 2 查看但前存在哪些虚拟环境：`conda env list` 或 `conda info -e`
+- 3 检查更新当前conda：`conda update conda`
+- 4 移除虚拟环境：`conda remove -n venv_name --all`
+- 5 设置镜像源：`conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
+- 6 激活虚拟环境：**Linux**，`conda activate venv_name`。 **Mac**，`source activate venv_name`
+- 7 失活虚拟环境：**Linux**，`conda deactivate`。 **Mac**，`source deactivate`
 
 
 
