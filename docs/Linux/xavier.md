@@ -1,5 +1,16 @@
 # nvidia xavier 环境配置
 
+#### 系统烧写
+1. sdkmanager 下载所需系统镜像
+2. 手动方式烧写
+    需要自己动手使xavier进入recovery模式：  
+    a、用原装usb先将host与Xavier连接，还要注意是连接电源灯旁边的插口；  
+    b、确保连接电源并保持Xavier为关闭状态；  
+    c、按住中间的按键（Force Recovery）不松手；  
+    d、按住左边的电源（Power）不松手；  
+    e、过一两秒，同时松手  
+3. 按提示一步一步走
+
 #### apt 镜像源
 
 1. 编辑 /etc/apt/sources.list
@@ -79,6 +90,7 @@ pip install ipython
 # 安装jtop
 cd ~/.local/bin
 sudo ./pip install jetson-stats
+sudo reboot
 ```
 
 #### 常用库文件的安装
@@ -88,22 +100,12 @@ sudo ./pip install jetson-stats
 sudo apt install \
     libgflags-dev \
     libprotobuf-dev protobuf-compiler \
-    v4l-utils # for video capture
+    v4l-utils \ # for video capture
+    libopenblas-dev # for torch
 
 ```
 
-2. yaml
-
-```bash
-git clone https://github.com/jbeder/yaml-cpp.git
-cd yaml-cpp
-mkdir build && cd build
-cmake .. -DYAML_BUILD_SHARED_LIBS=ON
-make -j$(nproc)
-sudo make install
-```
-
-3. cmake
+2. cmake
 
 ```bash
 wget https://github.com/Kitware/CMake/releases/download/v3.16.2/cmake-3.16.2.tar.gz
@@ -111,6 +113,17 @@ tar -xzf cmake-3.16.2.tar.gz
 cd  cmake-3.16.2/
 mkdir build && cd build
 cmake  -DCMAKE_USE_OPENSSL=OFF ..
+make -j$(nproc)
+sudo make install
+```
+
+3. yaml
+
+```bash
+git clone https://github.com/jbeder/yaml-cpp.git
+cd yaml-cpp
+mkdir build && cd build
+cmake .. -DYAML_BUILD_SHARED_LIBS=ON
 make -j$(nproc)
 sudo make install
 ```
