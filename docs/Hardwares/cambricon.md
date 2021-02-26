@@ -89,31 +89,37 @@ python genoff.py
 
 2. 在 CMakeLists.txt 末尾添加安装路径
 
-```CMakeLists
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX /usr/local/neuware CACHE PATH "TensorRT installation" FORCE)
-endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  ```CMakeLists
+  if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX /usr/local/neuware CACHE PATH "TensorRT installation" FORCE)
+  endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
-# Library
-install(TARGETS cnplugin
-        LIBRARY DESTINATION lib64)
-  
-# Header
-install(FILES ${PROJECT_SOURCE_DIR}/common/include/cnplugin.h
-        DESTINATION include)
-```
+  # Library
+  install(TARGETS cnplugin
+          LIBRARY DESTINATION lib64)
+    
+  # Header
+  install(FILES ${PROJECT_SOURCE_DIR}/common/include/cnplugin.h
+          DESTINATION include)
+  ```
 
 3. 完成自定义算子编写，参考上图修改和添加相应文件
 
 4. 编译
 
-```bash
-export NEUWARE_HOME=/usr/local/neuware/
-./build_cnplugin.sh
-cd build && make install
-```
+  ```bash
+  export NEUWARE_HOME=/usr/local/neuware/
+  ./build_cnplugin.sh
+  cd build && make install
+  ```
 
-5. 完成pytorch端自定义算子接口， 参考上图修改和添加相应文件
+5. 完成pytorch端自定义算子接口， 参考上图修改和添加相应文件，并重编译catch
+
+  ```bash
+  cd $CATCH_HOME/
+  rm -r build
+  python setup.py install
+  ```
 
 6. 测试算子
 
@@ -205,3 +211,5 @@ sudo apt install cnlicense
 5. mlu的物理计算单元很少，mlu220有4个，270有16个。像是拿掉了复杂指令逻辑的cpu集合。
 
 6. 模型有两个输入，导出离线模型后会将输入的顺序互换。
+
+7. 模型效率问题，mlu是深度学习专用型芯片，它的计算能力的来源主要靠类似cpu的SIMD指令，比如它有64个乘法器，那么一条乘法指令64个乘法器能够同时操作。所以要发挥mlu的计算能力，需要每时每刻“喂饱”mlu，如果一条指令只有一个数据进来，那么也就只有一个乘法器真正干了活，这就会导致计算效率的极大退化。所以在模型的设计上面，需要大而规整的操作，避免小而零碎的操作（目前也只能定性的说说了，毕竟寒武纪底层的算子实现我们是不知道的）。从计算上来说，现在的深度学习是依托于nvidia的gpu发展起来的。nvidia的gpu设计上是通用型的并行计算设备，它的并行能力主要是靠多个独立的计算核心，每个核心能够独立的执行自己的指令。所以从硬件上来看，nvidia能够赋予深度学习更多的灵活性和自由，深度学习的发展也会更灵活和自由，mlu的专用性将来会局限于深度学习中的一小部分算法。
