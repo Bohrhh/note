@@ -24,50 +24,54 @@
 #### 开发环境准备
 > neuware 1.4，pytorch框架
 
-1. 寒武纪云端[开发平台](http://devplatform.cambricon.com:30080/), 
-镜像选择 public-server/mlu270_ubuntu16.04.pytorch v1.4.0-safe
+1. 下载并导入镜像, 
+  ```
+  docker load -i mlu270_v1.4.0_ubuntu16.04.pytorch_v1.0.tar.gz
+  ```
 
-2. 寒武纪扩展版pytorch源码编译
-    - 编辑 ~/.pip/pip.conf 文件
+2. 编译pytorch扩展
+    - 进入docker
     ```bash
-    [global]
-    index-url = http://mirrors.aliyun.com/pypi/simple
-    [install]
-    trusted-host = mirrors.aliyun.com
+    docker run -it -v $HOME:$HOME -v $PWD:/root -w /root cambricon_image /bin/bash
+    cd /root
+    ln -s /opt/cambricon/pytorch/ pytorch
     ```
-    - 解压 Cambricon-MLU270-pytorch.tar.gz
-    - 在env_pytorch.sh末尾添加
-    ```bash
-    export MAX_JOBS=8
-    export LC_ALL=C
-    export PYTHON_VERSION=python3
+    - patch导入
     ```
-    - 编译
+    git clone 
+    cd 
+    sh patch.sh
+    ```
+    - 编译pytorch扩展catch
     ```bash
     source env_pytorch.sh
-    bash $CATCH_HOME/script/config_for_release.sh
+    source $CATCH_HOME/venv/pytorch/bin/activate 
+    pip uninstall torch_mlu
+    cd $CATCH_HOME
+    rm -r build 
+    python setup install
     ```
-    - 激活和失活pytorch环境
-    ```bash
-    # 激活
-    source env_pytorch.sh
-    source $CATCH_HOME/venv/pytorch/bin/activate
-    # 失活
-    deactivate
-    ```
+
+3. 编译插件
+  ```
+  cd /root/Cambricon-CNPlugin-MLU270
+  ./build_cnplugin.sh
+  ```
 
 #### 模型上手测试
-> 代码参见
+> 代码参见 test
 
 1. 生成量化权重参数
 ```bash
 # 详细参数参见 main 函数中的 config 部分
+# 需要相应的准备数据集
 python calibrate.py
 ```
 
 2. cpu推理，mlu在线逐层推理，mlu在线融合推理
 ```bash
 # 详细参数参见 main 函数中的 config 部分
+# 推理需要在寒武纪云端mlu270上进行
 python infer.py
 ```
 
@@ -76,6 +80,23 @@ python infer.py
 # 详细参数参见 main 函数中的 config 部分
 python genoff.py
 ```
+
+#### 离线推理
+> 代码参见 mlu_inference
+
+1. 编译
+```
+cd mlu_inference
+mkdir build && cd build
+cmake .. && make
+```
+
+2. 运行
+```
+# 修改配置文件，指定输入视频目录
+./build/inference configs/models/fastStereo.yaml
+```
+
 
 #### 自定义插件
 > 当遇到模型中有寒武纪官方未支持的算子时，需要自定义插件， 代码参见
