@@ -83,14 +83,15 @@ pip install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
 - 6 激活虚拟环境：**Linux**，`conda activate venv_name`。 **Mac**，`source activate venv_name`
 - 7 失活虚拟环境：**Linux**，`conda deactivate`。 **Mac**，`source deactivate`
 
+## 12， 关闭和启用图形界面
+- 关闭
+```
+sudo systemctl set-default multi-user.target
+sudo reboot
+```
 
-
-
-
-
-
-
-
-
-
-
+- 开启
+```
+sudo systemctl set-default graphical.target
+sudo reboot
+```
