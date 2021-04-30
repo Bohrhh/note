@@ -70,7 +70,7 @@ sudo chmod u+x rc.local
 
 
 #### 终端配置
-1. 编辑 .bashrc
+1. 编辑 .bashrc，在末尾添加
 
 ```
 export PATH=/usr/local/cuda-10.2/bin:$HOME/.local/bin:$PATH
@@ -83,6 +83,7 @@ sudo apt install -y libpython3-dev python3-pip
 
 # 更新pip并更改pip镜像源
 pip3 install pip -U -i https://pypi.tuna.tsinghua.edu.cn/simple
+source ~/.bashrc
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 安装其他
