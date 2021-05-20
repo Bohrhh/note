@@ -38,7 +38,8 @@ docker run -it \
            -v $HOME:$HOME \
            -v /tmp/.X11-unix:/tmp/.X11-unix \
            -w $PWD \
-           -e "DISPLAY=${DISPLAY}" \
+           -e DISPLAY=${DISPLAY} \
+           -e QT_X11_NO_MITSHM=1 \
            --gpus all \
            onnx2trt-7.0:python \
            /bin/bash
