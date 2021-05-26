@@ -95,3 +95,13 @@ sudo reboot
 sudo systemctl set-default graphical.target
 sudo reboot
 ```
+
+## 13， 关闭系统自动更新
+```
+# 修改配置文件/etc/apt/apt.conf.d/10periodic
+# 0是关闭，1是开启，将所有值改为0
+
+APT::Periodic::Update-Package-Lists "0";
+APT::Periodic::Download-Upgradeable-Packages "0";
+APT::Periodic::AutocleanInterval "0";
+```
