@@ -57,6 +57,8 @@ git branch --set-upstream-to=origin/dev dev
 ```
 # 常用命令：
 1. git diff filename
+2. git diff version1 version2：查看两个版本之间的修改
+3. git diff version1 version2 filename：查看两个版本之间的某个文件的修改情况
 ```
 
 ## git init
