@@ -70,3 +70,12 @@ make -j7
 sudo make install
 
 ```
+
+
+## 搜狗输入法
+- [软件下载页面](https://pinyin.sogou.com/linux/)  
+- [安装指南](https://pinyin.sogou.com/linux/help.php)  
+安装完之后，终端执行 `fcitx-configtool`，添加输入法如下图所示，最后注销重新登录即可。
+<div style="text-align: center;">
+    <img src=Linux/_images/sogou.png width=100%/>
+</div>
