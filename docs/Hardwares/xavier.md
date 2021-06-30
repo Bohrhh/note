@@ -17,16 +17,7 @@
 1. 编辑 /etc/apt/sources.list
 
 ```
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic main restricted
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-updates main restricted
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic universe
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-updates universe
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic multiverse
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-updates multiverse
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-backports main restricted universe multiverse
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-security main restricted
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-security universe
-deb https://mirror.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-security multiverse
+sudo sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list
 ```
 
 #### 开机自启动
