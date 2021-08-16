@@ -76,7 +76,7 @@ pip install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ## 11， python多环境配置
 - 1 创建虚拟环境：`conda create -n venv_name python=3.8`
-- 2 查看但前存在哪些虚拟环境：`conda env list` 或 `conda info -e`
+- 2 查看当前存在哪些虚拟环境：`conda env list` 或 `conda info -e`
 - 3 检查更新当前conda：`conda update conda`
 - 4 移除虚拟环境：`conda remove -n venv_name --all`
 - 5 设置镜像源：`conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
